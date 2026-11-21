@@ -1,31 +1,66 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+@import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@theme {
+  --color-base: #0a0a14;
+  --color-surface: #12121f;
+  --color-card: #181828;
+  --color-accent: #00bfff;
+  --color-violet: #8a2be2;
+  --color-muted: #9ca3af;
+
+  --font-sans: "Inter", "Segoe UI", "system-ui", "sans-serif";
+
+  --background-image-brand-gradient: linear-gradient(90deg, #00bfff, #8a2be2);
+  --background-image-brand-gradient-135: linear-gradient(135deg, #00bfff, #8a2be2);
+
+  --animate-fade-up: fadeUp 0.7s ease forwards;
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+}
 
 @layer base {
   html {
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-base text-white antialiased;
+    background-color: var(--color-base);
+    color: white;
+    -webkit-font-smoothing: antialiased;
     background-image: radial-gradient(circle at top left, #1b1b3a, #0a0a14 40%),
-      radial-gradient(circle at bottom right, #1a0033, #0a0a14 40%);
+                      radial-gradient(circle at bottom right, #1a0033, #0a0a14 40%);
   }
   ::selection {
-    @apply bg-accent/40 text-white;
+    background-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
+    color: white;
   }
 }
 
 @layer components {
   .gradient-text {
-    @apply bg-brand-gradient bg-clip-text text-transparent;
+    background-image: var(--background-image-brand-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
   .section-shell {
-    @apply max-w-6xl mx-auto px-6 py-24;
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+    padding-block: 6rem;
   }
   .glass-card {
-    @apply bg-card/70 backdrop-blur border border-white/5 rounded-2xl;
+    background-color: color-mix(in srgb, var(--color-card) 70%, transparent);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 1rem;
   }
 }
